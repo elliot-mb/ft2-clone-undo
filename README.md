@@ -1,3 +1,25 @@
+# This Fork
+The sole purpose of this fork is to add undo/redo key shortcuts to Fasttracker II. I could not see any other forks which had done this, and it is a behaviour I would benefit hugely from. 
+
+## Idea
+Such a behaviour would act just on the state of the 'piano roll' or tracker grid. A note is placed, deleted, or a group of notes are cut or pasted, and an action is stored to a list of sets of actions. This list is able to be traversed by the undo and redo key shortcuts. If change 'A' is made exactly after undoing change 'B', all sets of changes after change 'B' are deleted and freed in the history, and the latest change in the history becomes 'A'. e.g.
+
+```
+old                                         new
+[E] -> [D] -> [C] -> [B] <<undo<< [F] -> [G] -> ... (stream of <<undos<<)
+                     ^ new current 
+(user makes change [A])
+                                         ####
+old                              ##   ###  ##
+[E] -> [D] -> [C] -> [B] -> [A] ##  # poof  ###
+                                   ###  ##   # 
+                                      ####
+
+all the changes after [A] no longer exist and we cannot redo to them
+```
+
+This behaviour exists in many art programs and is logical to adopt here. 
+
 # ft2-clone
 Fasttracker II clone for Windows/macOS/Linux
 
